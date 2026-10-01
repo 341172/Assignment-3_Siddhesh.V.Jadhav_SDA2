@@ -1,0 +1,1386 @@
+{
+    "exportVersion": 10,
+    "dashboards": {
+        "dashboard-1": {
+            "title": "Member 1 - Purchase Fraud & High-Value Transaction Monitoring",
+            "layout": [
+                {
+                    "w": 2,
+                    "h": 1,
+                    "x": 0,
+                    "y": 0,
+                    "i": "item-1"
+                },
+                {
+                    "w": 2,
+                    "h": 1,
+                    "x": 2,
+                    "y": 0,
+                    "i": "item-2"
+                },
+                {
+                    "w": 2,
+                    "h": 1,
+                    "x": 4,
+                    "y": 0,
+                    "i": "item-3"
+                },
+                {
+                    "w": 2,
+                    "h": 1,
+                    "x": 6,
+                    "y": 0,
+                    "i": "item-4"
+                },
+                {
+                    "w": 2,
+                    "h": 1,
+                    "x": 0,
+                    "y": 1,
+                    "i": "item-5"
+                },
+                {
+                    "w": 3,
+                    "h": 1,
+                    "x": 2,
+                    "y": 1,
+                    "i": "item-6"
+                },
+                {
+                    "w": 3,
+                    "h": 1,
+                    "x": 5,
+                    "y": 1,
+                    "i": "item-7"
+                },
+                {
+                    "w": 8,
+                    "h": 2,
+                    "x": 0,
+                    "y": 2,
+                    "i": "item-8"
+                },
+                {
+                    "w": 4,
+                    "h": 2,
+                    "x": 0,
+                    "y": 4,
+                    "i": "item-9"
+                },
+                {
+                    "w": 4,
+                    "h": 2,
+                    "x": 4,
+                    "y": 4,
+                    "i": "item-10"
+                },
+                {
+                    "w": 3,
+                    "h": 2,
+                    "x": 0,
+                    "y": 6,
+                    "i": "item-11"
+                },
+                {
+                    "w": 5,
+                    "h": 2,
+                    "x": 3,
+                    "y": 6,
+                    "i": "item-12"
+                },
+                {
+                    "w": 3,
+                    "h": 2,
+                    "x": 0,
+                    "y": 8,
+                    "i": "item-13"
+                },
+                {
+                    "w": 5,
+                    "h": 2,
+                    "x": 3,
+                    "y": 8,
+                    "i": "item-14"
+                },
+                {
+                    "w": 8,
+                    "h": 2,
+                    "x": 0,
+                    "y": 10,
+                    "i": "item-15"
+                }
+            ],
+            "description": "Live view of POS/e-commerce transactions streamed via Kafka topic 'customer-purchase-data' and the fraud alerts raised by the consumer.",
+            "embedding": {
+                "anonymousAuthEnabled": false
+            },
+            "filters": [
+                {
+                    "disabled": false,
+                    "type": "String",
+                    "settings": {
+                        "allOthers": true,
+                        "values": []
+                    },
+                    "name": "Product category",
+                    "linkedFields": [
+                        {
+                            "dataSourceId": "src-txn",
+                            "fieldPath": "category"
+                        }
+                    ]
+                },
+                {
+                    "disabled": false,
+                    "type": "String",
+                    "settings": {
+                        "allOthers": true,
+                        "values": []
+                    },
+                    "name": "Customer",
+                    "linkedFields": [
+                        {
+                            "dataSourceId": "src-txn",
+                            "fieldPath": "customer_id"
+                        },
+                        {
+                            "dataSourceId": "src-fraud",
+                            "fieldPath": "customer_id"
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "items": {
+        "item-1": {
+            "title": "Total Revenue (Rs.)",
+            "description": "",
+            "dashboardId": "dashboard-1",
+            "dataSourceId": "src-txn",
+            "iconValue": "number",
+            "itemType": "chart",
+            "filters": [
+                {
+                    "fieldPath": "event_type",
+                    "disabled": false,
+                    "type": "String",
+                    "settings": {
+                        "allOthers": false,
+                        "values": [
+                            "purchase_transaction"
+                        ]
+                    }
+                }
+            ],
+            "missedFields": [],
+            "lookupFields": [],
+            "convertedFields": [],
+            "calculatedFields": [],
+            "channels": {
+                "value": {
+                    "field": "amount",
+                    "type": "quantitative",
+                    "inferredType": "Number",
+                    "channelType": "aggregation",
+                    "aggregate": "sum"
+                }
+            },
+            "reductions": {},
+            "customisations": {
+                "options": {},
+                "axes": {
+                    "value": {}
+                },
+                "channels": {
+                    "value": {
+                        "numberFormatting": {
+                            "enabled": true,
+                            "value": "Default"
+                        }
+                    }
+                },
+                "conditionalFormatting": []
+            },
+            "chartType": "Number",
+            "meta": {},
+            "sample": false,
+            "query": null,
+            "queryId": null,
+            "interactiveFiltering": "highlight",
+            "embedding": {
+                "id": "36f134d0-04ef-4c7a-a998-91e170b053bc"
+            }
+        },
+        "item-2": {
+            "title": "Purchase Transactions",
+            "description": "",
+            "dashboardId": "dashboard-1",
+            "dataSourceId": "src-txn",
+            "iconValue": "number",
+            "itemType": "chart",
+            "filters": [
+                {
+                    "fieldPath": "event_type",
+                    "disabled": false,
+                    "type": "String",
+                    "settings": {
+                        "allOthers": false,
+                        "values": [
+                            "purchase_transaction"
+                        ]
+                    }
+                }
+            ],
+            "missedFields": [],
+            "lookupFields": [],
+            "convertedFields": [],
+            "calculatedFields": [],
+            "channels": {
+                "value": {
+                    "field": "_id",
+                    "type": "quantitative",
+                    "inferredType": "String",
+                    "channelType": "aggregation",
+                    "aggregate": "count"
+                }
+            },
+            "reductions": {},
+            "customisations": {
+                "options": {},
+                "axes": {
+                    "value": {}
+                },
+                "channels": {
+                    "value": {
+                        "numberFormatting": {
+                            "enabled": true,
+                            "value": "Default"
+                        }
+                    }
+                },
+                "conditionalFormatting": []
+            },
+            "chartType": "Number",
+            "meta": {},
+            "sample": false,
+            "query": null,
+            "queryId": null,
+            "interactiveFiltering": "highlight",
+            "embedding": {
+                "id": "e070401b-9a7c-48e6-97ba-72410287f084"
+            }
+        },
+        "item-3": {
+            "title": "Refund Events",
+            "description": "",
+            "dashboardId": "dashboard-1",
+            "dataSourceId": "src-txn",
+            "iconValue": "number",
+            "itemType": "chart",
+            "filters": [
+                {
+                    "fieldPath": "event_type",
+                    "disabled": false,
+                    "type": "String",
+                    "settings": {
+                        "allOthers": false,
+                        "values": [
+                            "refund_event"
+                        ]
+                    }
+                }
+            ],
+            "missedFields": [],
+            "lookupFields": [],
+            "convertedFields": [],
+            "calculatedFields": [],
+            "channels": {
+                "value": {
+                    "field": "_id",
+                    "type": "quantitative",
+                    "inferredType": "String",
+                    "channelType": "aggregation",
+                    "aggregate": "count"
+                }
+            },
+            "reductions": {},
+            "customisations": {
+                "options": {},
+                "axes": {
+                    "value": {}
+                },
+                "channels": {
+                    "value": {
+                        "numberFormatting": {
+                            "enabled": true,
+                            "value": "Default"
+                        }
+                    }
+                },
+                "conditionalFormatting": []
+            },
+            "chartType": "Number",
+            "meta": {},
+            "sample": false,
+            "query": null,
+            "queryId": null,
+            "interactiveFiltering": "highlight",
+            "embedding": {
+                "id": "ca34c41d-bf76-4edf-abf0-9b1731068707"
+            }
+        },
+        "item-4": {
+            "title": "Fraud Alerts Raised",
+            "description": "",
+            "dashboardId": "dashboard-1",
+            "dataSourceId": "src-fraud",
+            "iconValue": "number",
+            "itemType": "chart",
+            "filters": [],
+            "missedFields": [],
+            "lookupFields": [],
+            "convertedFields": [],
+            "calculatedFields": [],
+            "channels": {
+                "value": {
+                    "field": "_id",
+                    "type": "quantitative",
+                    "inferredType": "String",
+                    "channelType": "aggregation",
+                    "aggregate": "count"
+                }
+            },
+            "reductions": {},
+            "customisations": {
+                "options": {},
+                "axes": {
+                    "value": {}
+                },
+                "channels": {
+                    "value": {
+                        "numberFormatting": {
+                            "enabled": true,
+                            "value": "Default"
+                        }
+                    }
+                },
+                "conditionalFormatting": [
+                    {
+                        "type": "discrete",
+                        "conditions": [
+                            {
+                                "target": {
+                                    "value": "value",
+                                    "type": "CHANNEL"
+                                },
+                                "operator": "NUMBER_GREATER_THAN",
+                                "value": "0"
+                            }
+                        ],
+                        "applyToEntireRow": false,
+                        "styling": {
+                            "color": "rgb(193, 4, 34)",
+                            "backgroundColor": "rgba(0, 0, 0, 0)",
+                            "fontStyle": "normal",
+                            "fontWeight": "bold",
+                            "textDecoration": "initial"
+                        }
+                    }
+                ]
+            },
+            "chartType": "Number",
+            "meta": {},
+            "sample": false,
+            "query": null,
+            "queryId": null,
+            "interactiveFiltering": "highlight",
+            "embedding": {
+                "id": "c881876d-accb-4ce7-9513-93d1725c2801"
+            }
+        },
+        "item-5": {
+            "title": "Average Order Value (Rs.)",
+            "description": "",
+            "dashboardId": "dashboard-1",
+            "dataSourceId": "src-txn",
+            "iconValue": "number",
+            "itemType": "chart",
+            "filters": [
+                {
+                    "fieldPath": "event_type",
+                    "disabled": false,
+                    "type": "String",
+                    "settings": {
+                        "allOthers": false,
+                        "values": [
+                            "purchase_transaction"
+                        ]
+                    }
+                }
+            ],
+            "missedFields": [],
+            "lookupFields": [],
+            "convertedFields": [],
+            "calculatedFields": [],
+            "channels": {
+                "value": {
+                    "field": "amount",
+                    "type": "quantitative",
+                    "inferredType": "Number",
+                    "channelType": "aggregation",
+                    "aggregate": "mean"
+                }
+            },
+            "reductions": {},
+            "customisations": {
+                "options": {},
+                "axes": {
+                    "value": {}
+                },
+                "channels": {
+                    "value": {
+                        "numberFormatting": {
+                            "enabled": true,
+                            "value": "Custom"
+                        },
+                        "numberDecimals": {
+                            "enabled": true,
+                            "value": "0"
+                        }
+                    }
+                },
+                "conditionalFormatting": []
+            },
+            "chartType": "Number",
+            "meta": {},
+            "sample": false,
+            "query": null,
+            "queryId": null,
+            "interactiveFiltering": "highlight",
+            "embedding": {
+                "id": "1d72e291-a7bb-4226-b69c-a0f77c0be8ad"
+            }
+        },
+        "item-6": {
+            "title": "High-Value Alerts (> Rs. 40,000)",
+            "description": "",
+            "dashboardId": "dashboard-1",
+            "dataSourceId": "src-fraud",
+            "iconValue": "number",
+            "itemType": "chart",
+            "filters": [
+                {
+                    "fieldPath": "alert_type",
+                    "disabled": false,
+                    "type": "String",
+                    "settings": {
+                        "allOthers": false,
+                        "values": [
+                            "HIGH_VALUE_TRANSACTION"
+                        ]
+                    }
+                }
+            ],
+            "missedFields": [],
+            "lookupFields": [],
+            "convertedFields": [],
+            "calculatedFields": [],
+            "channels": {
+                "value": {
+                    "field": "_id",
+                    "type": "quantitative",
+                    "inferredType": "String",
+                    "channelType": "aggregation",
+                    "aggregate": "count"
+                }
+            },
+            "reductions": {},
+            "customisations": {
+                "options": {},
+                "axes": {
+                    "value": {}
+                },
+                "channels": {
+                    "value": {
+                        "numberFormatting": {
+                            "enabled": true,
+                            "value": "Default"
+                        }
+                    }
+                },
+                "conditionalFormatting": [
+                    {
+                        "type": "discrete",
+                        "conditions": [
+                            {
+                                "target": {
+                                    "value": "value",
+                                    "type": "CHANNEL"
+                                },
+                                "operator": "NUMBER_GREATER_THAN",
+                                "value": "0"
+                            }
+                        ],
+                        "applyToEntireRow": false,
+                        "styling": {
+                            "color": "rgb(193, 4, 34)",
+                            "backgroundColor": "rgba(0, 0, 0, 0)",
+                            "fontStyle": "normal",
+                            "fontWeight": "bold",
+                            "textDecoration": "initial"
+                        }
+                    }
+                ]
+            },
+            "chartType": "Number",
+            "meta": {},
+            "sample": false,
+            "query": null,
+            "queryId": null,
+            "interactiveFiltering": "highlight",
+            "embedding": {
+                "id": "b2a68c79-93b5-44e5-91d7-73843ef151c9"
+            }
+        },
+        "item-7": {
+            "title": "Rapid Repeat Alerts (>3 in 60s)",
+            "description": "",
+            "dashboardId": "dashboard-1",
+            "dataSourceId": "src-fraud",
+            "iconValue": "number",
+            "itemType": "chart",
+            "filters": [
+                {
+                    "fieldPath": "alert_type",
+                    "disabled": false,
+                    "type": "String",
+                    "settings": {
+                        "allOthers": false,
+                        "values": [
+                            "RAPID_REPEAT_TRANSACTIONS"
+                        ]
+                    }
+                }
+            ],
+            "missedFields": [],
+            "lookupFields": [],
+            "convertedFields": [],
+            "calculatedFields": [],
+            "channels": {
+                "value": {
+                    "field": "_id",
+                    "type": "quantitative",
+                    "inferredType": "String",
+                    "channelType": "aggregation",
+                    "aggregate": "count"
+                }
+            },
+            "reductions": {},
+            "customisations": {
+                "options": {},
+                "axes": {
+                    "value": {}
+                },
+                "channels": {
+                    "value": {
+                        "numberFormatting": {
+                            "enabled": true,
+                            "value": "Default"
+                        }
+                    }
+                },
+                "conditionalFormatting": [
+                    {
+                        "type": "discrete",
+                        "conditions": [
+                            {
+                                "target": {
+                                    "value": "value",
+                                    "type": "CHANNEL"
+                                },
+                                "operator": "NUMBER_GREATER_THAN",
+                                "value": "0"
+                            }
+                        ],
+                        "applyToEntireRow": false,
+                        "styling": {
+                            "color": "rgb(193, 4, 34)",
+                            "backgroundColor": "rgba(0, 0, 0, 0)",
+                            "fontStyle": "normal",
+                            "fontWeight": "bold",
+                            "textDecoration": "initial"
+                        }
+                    }
+                ]
+            },
+            "chartType": "Number",
+            "meta": {},
+            "sample": false,
+            "query": null,
+            "queryId": null,
+            "interactiveFiltering": "highlight",
+            "embedding": {
+                "id": "da3a2342-194d-491d-af7d-94199a1b0df6"
+            }
+        },
+        "item-8": {
+            "title": "Transactions per Minute (IST)",
+            "description": "",
+            "dashboardId": "dashboard-1",
+            "dataSourceId": "src-txn",
+            "iconValue": "column-stacked",
+            "itemType": "chart",
+            "filters": [],
+            "missedFields": [],
+            "lookupFields": [],
+            "convertedFields": [],
+            "calculatedFields": [
+                {
+                    "fieldPath": "minute_ist",
+                    "rawExpression": "{\n    $dateToString: {\n        format: \"%H:%M\",\n        date: \"$event_time\",\n        timezone: \"Asia/Kolkata\"\n    }\n}",
+                    "derivedMQL": "{\"$dateToString\":{\"format\":\"%H:%M\",\"date\":\"$event_time\",\"timezone\":\"Asia/Kolkata\"}}"
+                }
+            ],
+            "channels": {
+                "x": {
+                    "field": "minute_ist",
+                    "type": "nominal",
+                    "inferredType": "String",
+                    "channelType": "category"
+                },
+                "y": {
+                    "field": "_id",
+                    "type": "quantitative",
+                    "inferredType": "String",
+                    "channelType": "aggregation",
+                    "aggregate": "count"
+                },
+                "color": {
+                    "field": "event_type",
+                    "type": "nominal",
+                    "inferredType": "String",
+                    "channelType": "category"
+                }
+            },
+            "reductions": {},
+            "customisations": {
+                "options": {
+                    "colorDiscrete": {
+                        "enabled": true,
+                        "value": [
+                            "#1392AB",
+                            "#16CC62",
+                            "#196EE6",
+                            "#E6B219",
+                            "#E6196E",
+                            "#19C3E6",
+                            "#116149",
+                            "#E65D19",
+                            "#ABABAB",
+                            "#80340E",
+                            "#73E0A1",
+                            "#8CB6F2",
+                            "#F0D175",
+                            "#F075A8",
+                            "#75DBF0",
+                            "#70A092",
+                            "#F09E75",
+                            "#CDCDCD",
+                            "#71BECD",
+                            "#B3856E"
+                        ]
+                    }
+                },
+                "axes": {
+                    "x": {
+                        "categoryLabelAngle": {
+                            "enabled": true,
+                            "value": "diagonal"
+                        }
+                    }
+                },
+                "channels": {
+                    "x": {
+                        "labelOverride": {
+                            "enabled": true,
+                            "value": "Time (IST)"
+                        }
+                    },
+                    "y": {
+                        "labelOverride": {
+                            "enabled": true,
+                            "value": "# Events"
+                        },
+                        "numberFormatting": {
+                            "enabled": true,
+                            "value": "Default"
+                        }
+                    },
+                    "color": {
+                        "labelOverride": {
+                            "enabled": true,
+                            "value": "Event type"
+                        }
+                    }
+                },
+                "conditionalFormatting": []
+            },
+            "chartType": "Stacked Column",
+            "meta": {},
+            "sample": false,
+            "query": null,
+            "queryId": null,
+            "interactiveFiltering": "highlight",
+            "embedding": {
+                "id": "853ee9ac-fb85-4992-add1-a398abb0594a"
+            }
+        },
+        "item-9": {
+            "title": "Revenue by Product Category",
+            "description": "",
+            "dashboardId": "dashboard-1",
+            "dataSourceId": "src-txn",
+            "iconValue": "bar-grouped",
+            "itemType": "chart",
+            "filters": [
+                {
+                    "fieldPath": "event_type",
+                    "disabled": false,
+                    "type": "String",
+                    "settings": {
+                        "allOthers": false,
+                        "values": [
+                            "purchase_transaction"
+                        ]
+                    }
+                }
+            ],
+            "missedFields": [],
+            "lookupFields": [],
+            "convertedFields": [],
+            "calculatedFields": [],
+            "channels": {
+                "y": {
+                    "field": "category",
+                    "type": "nominal",
+                    "inferredType": "String",
+                    "channelType": "category",
+                    "isLimiting": true,
+                    "limitingSize": "10"
+                },
+                "x": {
+                    "field": "amount",
+                    "type": "quantitative",
+                    "inferredType": "Number",
+                    "channelType": "aggregation",
+                    "aggregate": "sum"
+                }
+            },
+            "reductions": {},
+            "customisations": {
+                "options": {
+                    "dataValueLabels": {
+                        "enabled": true,
+                        "value": null
+                    },
+                    "colorDiscrete": {
+                        "enabled": true,
+                        "value": [
+                            "#1392AB"
+                        ]
+                    }
+                },
+                "axes": {
+                    "x": {}
+                },
+                "channels": {
+                    "y": {
+                        "labelOverride": {
+                            "enabled": true,
+                            "value": "Category"
+                        }
+                    },
+                    "x": {
+                        "labelOverride": {
+                            "enabled": true,
+                            "value": "Revenue (Rs.)"
+                        },
+                        "numberFormatting": {
+                            "enabled": true,
+                            "value": "Default"
+                        }
+                    }
+                },
+                "conditionalFormatting": []
+            },
+            "chartType": "Grouped Bar",
+            "meta": {},
+            "sample": false,
+            "query": null,
+            "queryId": null,
+            "interactiveFiltering": "highlight",
+            "embedding": {
+                "id": "00ac2535-5522-48e6-8da2-d71fc1276720"
+            }
+        },
+        "item-10": {
+            "title": "Transactions by Channel & Payment Method",
+            "description": "",
+            "dashboardId": "dashboard-1",
+            "dataSourceId": "src-txn",
+            "iconValue": "bar-stacked",
+            "itemType": "chart",
+            "filters": [],
+            "missedFields": [],
+            "lookupFields": [],
+            "convertedFields": [],
+            "calculatedFields": [],
+            "channels": {
+                "y": {
+                    "field": "channel",
+                    "type": "nominal",
+                    "inferredType": "String",
+                    "channelType": "category",
+                    "isLimiting": true,
+                    "limitingSize": "10"
+                },
+                "x": {
+                    "field": "_id",
+                    "type": "quantitative",
+                    "inferredType": "String",
+                    "channelType": "aggregation",
+                    "aggregate": "count"
+                },
+                "color": {
+                    "field": "payment_method",
+                    "type": "nominal",
+                    "inferredType": "String",
+                    "channelType": "category"
+                }
+            },
+            "reductions": {},
+            "customisations": {
+                "options": {
+                    "colorDiscrete": {
+                        "enabled": true,
+                        "value": [
+                            "#1392AB",
+                            "#16CC62",
+                            "#196EE6",
+                            "#E6B219",
+                            "#E6196E",
+                            "#19C3E6",
+                            "#116149",
+                            "#E65D19",
+                            "#ABABAB",
+                            "#80340E",
+                            "#73E0A1",
+                            "#8CB6F2",
+                            "#F0D175",
+                            "#F075A8",
+                            "#75DBF0",
+                            "#70A092",
+                            "#F09E75",
+                            "#CDCDCD",
+                            "#71BECD",
+                            "#B3856E"
+                        ]
+                    }
+                },
+                "axes": {
+                    "x": {}
+                },
+                "channels": {
+                    "y": {
+                        "labelOverride": {
+                            "enabled": true,
+                            "value": "Channel"
+                        }
+                    },
+                    "x": {
+                        "labelOverride": {
+                            "enabled": true,
+                            "value": "# Transactions"
+                        },
+                        "numberFormatting": {
+                            "enabled": true,
+                            "value": "Default"
+                        }
+                    },
+                    "color": {
+                        "labelOverride": {
+                            "enabled": true,
+                            "value": "Payment method"
+                        }
+                    }
+                },
+                "conditionalFormatting": []
+            },
+            "chartType": "Stacked Bar",
+            "meta": {},
+            "sample": false,
+            "query": null,
+            "queryId": null,
+            "interactiveFiltering": "highlight",
+            "embedding": {
+                "id": "34ce22c6-da7d-479f-bfd2-7d389e121fe6"
+            }
+        },
+        "item-11": {
+            "title": "Fraud Alerts by Type",
+            "description": "",
+            "dashboardId": "dashboard-1",
+            "dataSourceId": "src-fraud",
+            "iconValue": "donut",
+            "itemType": "chart",
+            "filters": [],
+            "missedFields": [],
+            "lookupFields": [],
+            "convertedFields": [],
+            "calculatedFields": [],
+            "channels": {
+                "label": {
+                    "field": "alert_type",
+                    "type": "nominal",
+                    "inferredType": "String",
+                    "channelType": "category",
+                    "isLimiting": true,
+                    "limitingSize": "10",
+                    "allOthers": true
+                },
+                "value": {
+                    "field": "_id",
+                    "type": "quantitative",
+                    "inferredType": "String",
+                    "channelType": "aggregation",
+                    "aggregate": "count"
+                }
+            },
+            "reductions": {},
+            "customisations": {
+                "options": {},
+                "axes": {
+                    "value": {}
+                },
+                "channels": {
+                    "label": {
+                        "labelOverride": {
+                            "enabled": true,
+                            "value": "Alert type"
+                        }
+                    },
+                    "value": {
+                        "numberFormatting": {
+                            "enabled": true,
+                            "value": "Default"
+                        }
+                    }
+                },
+                "conditionalFormatting": []
+            },
+            "chartType": "Donut",
+            "meta": {},
+            "sample": false,
+            "query": null,
+            "queryId": null,
+            "interactiveFiltering": "highlight",
+            "embedding": {
+                "id": "a058a979-7674-4594-a90d-0b8a3ae1afd8"
+            }
+        },
+        "item-12": {
+            "title": "Customers with Most Fraud Alerts",
+            "description": "",
+            "dashboardId": "dashboard-1",
+            "dataSourceId": "src-fraud",
+            "iconValue": "bar-stacked",
+            "itemType": "chart",
+            "filters": [],
+            "missedFields": [],
+            "lookupFields": [],
+            "convertedFields": [],
+            "calculatedFields": [],
+            "channels": {
+                "y": {
+                    "field": "customer_id",
+                    "type": "nominal",
+                    "inferredType": "String",
+                    "channelType": "category",
+                    "isLimiting": true,
+                    "limitingSize": "10"
+                },
+                "x": {
+                    "field": "_id",
+                    "type": "quantitative",
+                    "inferredType": "String",
+                    "channelType": "aggregation",
+                    "aggregate": "count"
+                },
+                "color": {
+                    "field": "alert_type",
+                    "type": "nominal",
+                    "inferredType": "String",
+                    "channelType": "category"
+                }
+            },
+            "reductions": {},
+            "customisations": {
+                "options": {
+                    "colorDiscrete": {
+                        "enabled": true,
+                        "value": [
+                            "#1392AB",
+                            "#16CC62",
+                            "#196EE6",
+                            "#E6B219",
+                            "#E6196E",
+                            "#19C3E6",
+                            "#116149",
+                            "#E65D19",
+                            "#ABABAB",
+                            "#80340E",
+                            "#73E0A1",
+                            "#8CB6F2",
+                            "#F0D175",
+                            "#F075A8",
+                            "#75DBF0",
+                            "#70A092",
+                            "#F09E75",
+                            "#CDCDCD",
+                            "#71BECD",
+                            "#B3856E"
+                        ]
+                    }
+                },
+                "axes": {
+                    "x": {}
+                },
+                "channels": {
+                    "y": {
+                        "labelOverride": {
+                            "enabled": true,
+                            "value": "Customer"
+                        }
+                    },
+                    "x": {
+                        "labelOverride": {
+                            "enabled": true,
+                            "value": "# Alerts"
+                        },
+                        "numberFormatting": {
+                            "enabled": true,
+                            "value": "Default"
+                        }
+                    },
+                    "color": {
+                        "labelOverride": {
+                            "enabled": true,
+                            "value": "Alert type"
+                        }
+                    }
+                },
+                "conditionalFormatting": []
+            },
+            "chartType": "Stacked Bar",
+            "meta": {},
+            "sample": false,
+            "query": null,
+            "queryId": null,
+            "interactiveFiltering": "highlight",
+            "embedding": {
+                "id": "58c62ac8-21d4-4bea-bb00-f6946278debd"
+            }
+        },
+        "item-13": {
+            "title": "Payment Method Mix",
+            "description": "",
+            "dashboardId": "dashboard-1",
+            "dataSourceId": "src-txn",
+            "iconValue": "donut",
+            "itemType": "chart",
+            "filters": [],
+            "missedFields": [],
+            "lookupFields": [],
+            "convertedFields": [],
+            "calculatedFields": [],
+            "channels": {
+                "label": {
+                    "field": "payment_method",
+                    "type": "nominal",
+                    "inferredType": "String",
+                    "channelType": "category",
+                    "isLimiting": true,
+                    "limitingSize": "10",
+                    "allOthers": true
+                },
+                "value": {
+                    "field": "_id",
+                    "type": "quantitative",
+                    "inferredType": "String",
+                    "channelType": "aggregation",
+                    "aggregate": "count"
+                }
+            },
+            "reductions": {},
+            "customisations": {
+                "options": {},
+                "axes": {
+                    "value": {}
+                },
+                "channels": {
+                    "label": {
+                        "labelOverride": {
+                            "enabled": true,
+                            "value": "Payment method"
+                        }
+                    },
+                    "value": {
+                        "numberFormatting": {
+                            "enabled": true,
+                            "value": "Default"
+                        }
+                    }
+                },
+                "conditionalFormatting": []
+            },
+            "chartType": "Donut",
+            "meta": {},
+            "sample": false,
+            "query": null,
+            "queryId": null,
+            "interactiveFiltering": "highlight",
+            "embedding": {
+                "id": "73ca666d-3a1a-472d-b2c3-f7003b5e8a05"
+            }
+        },
+        "item-14": {
+            "title": "Store-wise Sales Summary",
+            "description": "",
+            "dashboardId": "dashboard-1",
+            "dataSourceId": "src-txn",
+            "iconValue": "data-table",
+            "itemType": "chart",
+            "filters": [
+                {
+                    "fieldPath": "event_type",
+                    "disabled": false,
+                    "type": "String",
+                    "settings": {
+                        "allOthers": false,
+                        "values": [
+                            "purchase_transaction"
+                        ]
+                    }
+                }
+            ],
+            "missedFields": [],
+            "lookupFields": [],
+            "convertedFields": [],
+            "calculatedFields": [],
+            "channels": {
+                "group": {
+                    "field": "store",
+                    "type": "nominal",
+                    "inferredType": "String",
+                    "channelType": "category"
+                },
+                "value": {
+                    "field": "_id",
+                    "type": "quantitative",
+                    "inferredType": "String",
+                    "channelType": "aggregation",
+                    "aggregate": "count"
+                },
+                "value_series_0": {
+                    "field": "amount",
+                    "type": "quantitative",
+                    "inferredType": "Number",
+                    "channelType": "aggregation",
+                    "aggregate": "sum"
+                },
+                "value_series_1": {
+                    "field": "amount",
+                    "type": "quantitative",
+                    "inferredType": "Number",
+                    "channelType": "aggregation",
+                    "aggregate": "mean"
+                }
+            },
+            "reductions": {},
+            "customisations": {
+                "options": {
+                    "totalsColumn": {
+                        "enabled": false,
+                        "value": null
+                    }
+                },
+                "axes": {},
+                "channels": {
+                    "group": {
+                        "labelOverride": {
+                            "enabled": true,
+                            "value": "Store"
+                        }
+                    },
+                    "value": {
+                        "labelOverride": {
+                            "enabled": true,
+                            "value": "# Transactions"
+                        },
+                        "numberFormatting": {
+                            "enabled": true,
+                            "value": "Default"
+                        }
+                    },
+                    "value_series_0": {
+                        "labelOverride": {
+                            "enabled": true,
+                            "value": "Revenue (Rs.)"
+                        },
+                        "numberFormatting": {
+                            "enabled": true,
+                            "value": "Default"
+                        }
+                    },
+                    "value_series_1": {
+                        "labelOverride": {
+                            "enabled": true,
+                            "value": "Avg Order (Rs.)"
+                        },
+                        "numberFormatting": {
+                            "enabled": true,
+                            "value": "Custom"
+                        },
+                        "numberDecimals": {
+                            "enabled": true,
+                            "value": "0"
+                        }
+                    }
+                },
+                "conditionalFormatting": [
+                    {
+                        "type": "continuous",
+                        "conditions": [
+                            {
+                                "target": {
+                                    "type": "CHANNEL",
+                                    "value": "value_series_0"
+                                },
+                                "operator": "",
+                                "value": ""
+                            }
+                        ],
+                        "applyToEntireRow": false,
+                        "styling": {
+                            "backgroundColor": "mdbredwhitegreen",
+                            "reverse": true
+                        }
+                    }
+                ]
+            },
+            "chartType": "Data Table",
+            "meta": {},
+            "sample": false,
+            "query": null,
+            "queryId": null,
+            "interactiveFiltering": "highlight",
+            "embedding": {
+                "id": "2ec3dc6a-faa7-4939-b420-e47118a79d97"
+            }
+        },
+        "item-15": {
+            "title": "Flagged Value by Product (Rs.)",
+            "description": "",
+            "dashboardId": "dashboard-1",
+            "dataSourceId": "src-fraud",
+            "iconValue": "bar-grouped",
+            "itemType": "chart",
+            "filters": [],
+            "missedFields": [],
+            "lookupFields": [],
+            "convertedFields": [],
+            "calculatedFields": [],
+            "channels": {
+                "y": {
+                    "field": "product_name",
+                    "type": "nominal",
+                    "inferredType": "String",
+                    "channelType": "category",
+                    "isLimiting": true,
+                    "limitingSize": "10"
+                },
+                "x": {
+                    "field": "amount",
+                    "type": "quantitative",
+                    "inferredType": "Number",
+                    "channelType": "aggregation",
+                    "aggregate": "sum"
+                }
+            },
+            "reductions": {},
+            "customisations": {
+                "options": {
+                    "dataValueLabels": {
+                        "enabled": true,
+                        "value": null
+                    },
+                    "colorDiscrete": {
+                        "enabled": true,
+                        "value": [
+                            "#E6196E"
+                        ]
+                    }
+                },
+                "axes": {
+                    "x": {}
+                },
+                "channels": {
+                    "y": {
+                        "labelOverride": {
+                            "enabled": true,
+                            "value": "Product"
+                        }
+                    },
+                    "x": {
+                        "labelOverride": {
+                            "enabled": true,
+                            "value": "Flagged amount (Rs.)"
+                        },
+                        "numberFormatting": {
+                            "enabled": true,
+                            "value": "Default"
+                        }
+                    }
+                },
+                "conditionalFormatting": []
+            },
+            "chartType": "Grouped Bar",
+            "meta": {},
+            "sample": false,
+            "query": null,
+            "queryId": null,
+            "interactiveFiltering": "highlight",
+            "embedding": {
+                "id": "cff2c992-f459-4732-9a99-02a21c3a1ef6"
+            }
+        }
+    },
+    "dataSources": {
+        "src-txn": {
+            "alias": "FMCD: purchase_transactions",
+            "collection": "purchase_transactions",
+            "database": "fmcd_streaming",
+            "deployment": "Cluster0",
+            "sourceType": "cluster"
+        },
+        "src-fraud": {
+            "alias": "FMCD: fraud_alerts",
+            "collection": "fraud_alerts",
+            "database": "fmcd_streaming",
+            "deployment": "Cluster0",
+            "sourceType": "cluster"
+        }
+    },
+    "queries": {}
+}
